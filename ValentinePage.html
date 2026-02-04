@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6f78fb 0%, #fa9eff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #d63384;
+            margin-bottom: 20px;
+            font-size: 2.1em;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #d63384;
+            color: white;
+            padding: 12px 40px;
+            margin-left: 30px;
+            margin-right: 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #c2185b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💘 Pour Morgane 💘</h1>
+        <p id="question">Est-ce que tu veux bien être ma Valentine ? 💖</p>
+        <p id="message"></p>
+        <button id="OUI">Oui 🥰</button> 
+        <button id="NON">Non 😢</button>
+    </div>
+</body>
+</html>
+
+<script>
+
+function onBtnYes() {
+    console.log("OUI");
+    if (document.getElementById("question") !== null) {
+        document.getElementById("question").remove();
+    }
+    if (document.getElementById("NON") !== null) {
+        document.getElementById("NON").remove();
+    }
+    document.getElementById("message").textContent = "Lets gooooo ! 💕";
+    const hearts = ["💖", "💕", "💗", "💓", "💞"];
+    for (let i = 0; i < 50; i++) {
+        const heart = document.createElement("div");
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.top = "-30px";
+        heart.style.fontSize = Math.random() * 20 + 20 + "px";
+        heart.style.opacity = "1";
+        heart.style.pointerEvents = "none";
+        heart.style.animation = `fall ${Math.random() * 2 + 2}s linear forwards`;
+        document.body.appendChild(heart);
+    }
+    const style = document.createElement("style");
+    style.textContent = `@keyframes fall { to { transform: translateY(100vh) translateX(${Math.random() * 100 - 50}px); opacity: 0; } }`;
+    document.head.appendChild(style);
+}
+
+let counter = 0;
+function onBtnNo() {
+    document.getElementById("message").textContent = "";
+    console.log("NON");
+    console.log(counter);
+    
+    
+    const messages = ["Sérieusement ? 😢", "Allez, dis oui ! 🥺", "Tu es sûre ? 💔", "Une dernière chance ! 😍", "D'accord, tu as plus le choix maintenant 😉"];
+    
+    document.getElementById("message").textContent = messages[counter];
+    counter++;
+    
+    if (counter >= 5) {
+        document.getElementById("NON").remove();
+        document.getElementById("message").textContent = "D'accord, tu as plus le choix maintenant 😉";
+    }
+}
+
+document.getElementById("OUI").addEventListener("click", onBtnYes);
+document.getElementById("NON").addEventListener("click", onBtnNo);
+</script>
